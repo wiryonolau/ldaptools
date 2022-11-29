@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -9,6 +10,8 @@
  */
 
 namespace LdapTools\BatchModify;
+
+use Traversable;
 
 /**
  * Represents a collection of batch statements to be sent to LDAP.
@@ -29,7 +32,7 @@ class BatchCollection implements \IteratorAggregate
 
     /**
      * @param string|null $dn
-     * @param Batch[] $batches
+     * @param Batch $batches
      */
     public function __construct($dn = null, Batch ...$batches)
     {
@@ -53,7 +56,7 @@ class BatchCollection implements \IteratorAggregate
     /**
      * Add an individual batch action to the collection.
      *
-     * @param Batch[] ...$batches
+     * @param Batch ...$batches
      * @return $this
      */
     public function add(Batch ...$batches)
@@ -156,7 +159,7 @@ class BatchCollection implements \IteratorAggregate
      *
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new \ArrayIterator($this->toArray());
     }
@@ -166,7 +169,7 @@ class BatchCollection implements \IteratorAggregate
      */
     public function __clone()
     {
-        foreach ($this->batches as $i =>$batch) {
+        foreach ($this->batches as $i => $batch) {
             $this->batches[$i] = clone $batch;
         }
     }

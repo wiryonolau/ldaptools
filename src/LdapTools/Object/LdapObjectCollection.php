@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -9,6 +10,8 @@
  */
 
 namespace LdapTools\Object;
+
+use Traversable;
 
 /**
  * Represents a collection of LdapObject classes. Allows for iteration, filtering, etc.
@@ -58,7 +61,7 @@ class LdapObjectCollection implements \IteratorAggregate, \Countable
      *
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new \ArrayIterator($this->objects);
     }
@@ -68,7 +71,7 @@ class LdapObjectCollection implements \IteratorAggregate, \Countable
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->objects);
     }

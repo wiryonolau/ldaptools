@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -118,7 +119,7 @@ class PageControl
     /**
      * Signifies to the connection to expect the next paged result with the current cookie and page size.
      *
-     * @param LDAP\Result|resource $result
+     * @param \LDAP\Result $result
      */
     public function next($result)
     {

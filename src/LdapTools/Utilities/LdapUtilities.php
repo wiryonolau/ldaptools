@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -78,6 +79,8 @@ class LdapUtilities
      */
     public static function escapeValue($value, $ignore = null, $flags = null)
     {
+        $ignore = is_null($ignore) ? "" : $ignore;
+
         // If this is a hexadecimal escaped string, then do not escape it.
         $value = preg_match('/^(\\\[0-9a-fA-F]{2})+$/', (string) $value) ? $value : ldap_escape($value, $ignore, $flags);
 
@@ -147,7 +150,7 @@ class LdapUtilities
             if (count($values) === 1) {
                 throw new InvalidArgumentException(sprintf('Unable to parse DN piece "%s".', $values[0]));
             }
-            $dn[$index] = $values[0].'='.self::escapeValue($values[1], null, LDAP_ESCAPE_DN);
+            $dn[$index] = $values[0] . '=' . self::escapeValue($values[1], null, LDAP_ESCAPE_DN);
         }
 
         return implode(',', $dn);
@@ -169,7 +172,7 @@ class LdapUtilities
         }
         $pieces = [];
         for ($i = 3; $i < count($matches); $i += 3) {
-            $pieces[] = $withAttributes ? $matches[$i - 1].'='.$matches[$i] : $matches[$i];
+            $pieces[] = $withAttributes ? $matches[$i - 1] . '=' . $matches[$i] : $matches[$i];
         }
 
         return $pieces;
@@ -321,7 +324,7 @@ class LdapUtilities
      */
     public static function getLdapServersForDomain($domain)
     {
-        $hosts = (new Dns())->getRecord(self::SRV_PREFIX.$domain, DNS_SRV);
+        $hosts = (new Dns())->getRecord(self::SRV_PREFIX . $domain, DNS_SRV);
 
         return is_array($hosts) ? array_column($hosts, 'target') : [];
     }
@@ -385,7 +388,7 @@ class LdapUtilities
         $rdn = self::explodeDn($dn, 0)[0];
         $rdn = explode('=', $rdn, 2);
 
-        return $rdn[0].'='.self::escapeValue($rdn[1], null, LDAP_ESCAPE_DN);
+        return $rdn[0] . '=' . self::escapeValue($rdn[1], null, LDAP_ESCAPE_DN);
     }
 
     /**
@@ -401,10 +404,10 @@ class LdapUtilities
             throw new InvalidArgumentException(sprintf('DN "%s" has no parent.', $dn));
         }
         array_shift($parts);
-    
+
         return self::implodeDn($parts);
     }
-    
+
     /**
      * Generate a UUIDv4 string.
      *
@@ -433,7 +436,7 @@ class LdapUtilities
             $alias = $pieces[0];
             $attribute = $pieces[1];
         }
-        
+
         return [$alias, $attribute];
     }
 }

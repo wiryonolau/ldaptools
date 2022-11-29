@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -151,7 +152,7 @@ class LdapOperationInvoker implements LdapOperationInvokerInterface
      */
     protected function getCacheOrHandlerResult(LdapOperationInterface $operation, OperationHandlerInterface $handler, LogOperation $log = null)
     {
-        /** @var CacheableOperationInterface $operation */
+        /** @var CacheableOperationInterface|LdapOperationInterface $operation */
         $cacheKey = $this->shouldUseCache($operation) ? $this->getCacheKey($operation) : null;
         $usedCache = false;
 
@@ -213,7 +214,7 @@ class LdapOperationInvoker implements LdapOperationInvokerInterface
      */
     protected function getCacheKey(CacheableOperationInterface $operation)
     {
-        return $this->connection->getConfig()->getDomainName().$operation->getCacheKey();
+        return $this->connection->getConfig()->getDomainName() . $operation->getCacheKey();
     }
 
     /**

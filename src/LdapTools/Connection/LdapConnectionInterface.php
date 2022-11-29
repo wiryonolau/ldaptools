@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -31,7 +32,7 @@ interface LdapConnectionInterface
     /**
      * Get the LDAP connection resource.
      *
-     * @return LDAP\Connection|resource
+     * @return \LDAP\Connection
      */
     public function getResource();
 

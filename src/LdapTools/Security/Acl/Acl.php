@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -162,7 +163,7 @@ abstract class Acl
     /**
      * Add one or more ACEs to the ACL.
      *
-     * @param Ace[] ...$aces
+     * @param Ace ...$aces
      * @return $this
      */
     public function addAce(Ace ...$aces)
@@ -180,7 +181,7 @@ abstract class Acl
     /**
      * Remove one or more ACEs from the ACL.
      *
-     * @param Ace[] ...$aces
+     * @param Ace ...$aces
      * @return $this
      */
     public function removeAce(Ace ...$aces)
@@ -240,7 +241,7 @@ abstract class Acl
             ((16 + (strlen(bin2hex($aces)))) / 2),
             count($this->aces),
             $this->sbz2
-        ).$aces;
+        ) . $aces;
     }
 
     /**

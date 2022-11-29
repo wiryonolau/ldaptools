@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -139,7 +140,7 @@ class QueryOperationHandler implements OperationHandlerInterface
     /**
      * Process a LDAP search result and merge it with the existing entries if possible.
      *
-     * @param LDAP\Result|resource $result
+     * @param \LDAP\Result $result
      * @param array $allEntries
      * @return array
      * @throws LdapConnectionException

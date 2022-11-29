@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -20,6 +21,7 @@ use LdapTools\Query\Operator\bAnd;
 use LdapTools\Query\Operator\bOr;
 use LdapTools\Query\Operator\Comparison;
 use LdapTools\Query\Operator\Wildcard;
+use Traversable;
 
 /**
  * Used to store and iterate on the operators used to build a LDAP query.
@@ -81,7 +83,7 @@ class OperatorCollection implements \IteratorAggregate
                 throw new InvalidArgumentException('Unknown operator type.');
             }
         }
-        
+
         return $this;
     }
 
@@ -109,7 +111,7 @@ class OperatorCollection implements \IteratorAggregate
                 $schema->getObjectType()
             ));
         }
-        
+
         $this->aliases[$alias] = $schema;
     }
 
@@ -128,7 +130,7 @@ class OperatorCollection implements \IteratorAggregate
      *
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new \ArrayIterator($this->sortOperatorsToArray());
     }
@@ -272,7 +274,7 @@ class OperatorCollection implements \IteratorAggregate
         $filter = implode('', $filters);
 
         if (1 < count($filters)) {
-            $filter = bAnd::SEPARATOR_START.bAnd::SYMBOL.$filter.bAnd::SEPARATOR_END;
+            $filter = bAnd::SEPARATOR_START . bAnd::SYMBOL . $filter . bAnd::SEPARATOR_END;
         }
 
         return $filter;
@@ -294,7 +296,7 @@ class OperatorCollection implements \IteratorAggregate
         if (count($filters) == 1) {
             return $filters[0];
         } else {
-            return bOr::SEPARATOR_START.bOr::SYMBOL.implode('', $filters).bOr::SEPARATOR_END;
+            return bOr::SEPARATOR_START . bOr::SYMBOL . implode('', $filters) . bOr::SEPARATOR_END;
         }
     }
 }

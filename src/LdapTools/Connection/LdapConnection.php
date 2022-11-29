@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -43,7 +44,7 @@ class LdapConnection implements LdapConnectionInterface
     protected $isBound = false;
 
     /**
-     * @var LDAP\Connection|resource
+     * @var \LDAP\Connection
      */
     protected $connection;
 
@@ -332,7 +333,7 @@ class LdapConnection implements LdapConnectionInterface
     protected function getLdapUrl($server = null)
     {
         $server = $server ?: $this->serverPool->getServer();
-        $ldapUrl = ($this->config->getUseSsl() ? 'ldaps' : 'ldap').'://'.$server.':'.$this->config->getPort();
+        $ldapUrl = ($this->config->getUseSsl() ? 'ldaps' : 'ldap') . '://' . $server . ':' . $this->config->getPort();
 
         return [$ldapUrl, $server];
     }
