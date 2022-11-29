@@ -55,7 +55,7 @@ trait ContainsOperatorsTrait
             return '';
         }
 
-        return BaseOperator::SEPARATOR_START . MatchingRule::SYMBOL . $innerFilter . BaseOperator::SEPARATOR_END;
+        return BaseOperator::SEPARATOR_START . bAnd::SYMBOL . $innerFilter . BaseOperator::SEPARATOR_END;
     }
 
     /**
