@@ -18,8 +18,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
-        "ext-ldap": "*",
+        "php": "^8.0",
         "symfony/yaml": "~3.0",
         "symfony/event-dispatcher": "~4.0",
         "ramsey/uuid": "~4.0",
@@ -33,12 +32,15 @@
     },
     "require-dev": {
         "phpspec/phpspec": "~7.2",
-        "friendsofphp/php-cs-fixer": "~3.0",
         "tedivm/stash": "~0.17.0",
         "doctrine/cache": "~1.0"
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "platform": {
+            "php": "8.1.11",
+            "ext-ldap": "1"
+        }
     },
     "autoload": {
         "psr-4": {"LdapTools\\": "src/LdapTools"}

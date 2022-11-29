@@ -1,8 +1,21 @@
+*.swp
+*.bak
+.env
+build
+dist
+*.dist
+*.dist.*
+auth
+*~
+.composer
 composer.lock
-composer.phar
-.idea
-vendor/
-bin/
-site/
+*.tar.gz
+*.zip
+vendor
+.phpunit*
+*.local
 *.local.*
+.idea
+bin
+site
 
