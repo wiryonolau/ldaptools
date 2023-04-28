@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -33,6 +34,7 @@ class AttributeConverterFactory
         'windows_sid' => '\LdapTools\AttributeConverter\ConvertWindowsSid',
         'windows_time' => '\LdapTools\AttributeConverter\ConvertWindowsTime',
         'windows_generalized_time' => '\LdapTools\AttributeConverter\ConvertWindowsGeneralizedTime',
+        'ip_address' => '\LdapTools\AttributeConverter\ConvertIpAddress',
         'windows_security' => '\LdapTools\AttributeConverter\ConvertWindowsSecurity',
         'encode_windows_password' => '\LdapTools\AttributeConverter\EncodeWindowsPassword',
         'password_must_change' => '\LdapTools\AttributeConverter\ConvertPasswordMustChange',
