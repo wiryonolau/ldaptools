@@ -14,9 +14,9 @@ objects:
             flags:
                 _default:
                     default_value:
-                        LdapTools\Enums\AD\UserAccountControl: 'NormalAccount'
+                        LdapTools\Enums\AD\UserAccountControl: "NormalAccount"
                     attribute:
-                        LdapTools\Enums\AD\UserAccountControl: 'userAccountControl'
+                        LdapTools\Enums\AD\UserAccountControl: "userAccountControl"
                 disabled:
                     flag_enum: 'LdapTools\Enums\AD\UserAccountControl::Disabled'
                 enabled:
@@ -69,49 +69,51 @@ objects:
                     address_type: smtp
         # These are converters to be applied for going both to and from LDAP.
         converters:
-             bool:
-                 - 'exchangeHideFromGAL'
-             group_membership:
-                 - 'groups'
-             int:
-                 - 'badPasswordCount'
-                 - 'employeeNumber'
-             windows_guid:
-                 - 'exchangeMailboxGuid'
-                 - 'guid'
-             encode_windows_password:
-                 - 'password'
-             windows_sid:
-                 - 'sid'
-             windows_generalized_time:
-                 - 'created'
-                 - 'modified'
-             windows_time:
-                 - 'passwordLastSet'
-             flags:
-                 - 'disabled'
-                 - 'enabled'
-                 - 'passwordIsReversible'
-                 - 'passwordNeverExpires'
-                 - 'smartCardRequired'
-                 - 'trustedForAllDelegation'
-                 - 'trustedForAnyAuthDelegation'
-             password_must_change: [ passwordMustChange ]
-             value_to_dn:
-                - 'exchangeMailboxDatabase'
-                - 'exchangePolicyRBAC'
-                - 'exchangePolicyActiveSync'
-                - 'exchangePolicyRetention'
-                - 'manager'
-             exchange_proxy_address:
-                - 'exchangeSmtpAddresses'
-                - 'exchangeDefaultSmtpAddress'
-             logon_workstations: [ logonWorkstations ]
-             account_expires: [ accountExpirationDate ]
-             primary_group: [ primaryGroup ]
-             lockout_time:
-                - 'locked'
-                - 'lockedDate'
+            bool:
+                - "exchangeHideFromGAL"
+            group_membership:
+                - "groups"
+            int:
+                - "badPasswordCount"
+                - "employeeNumber"
+            windows_guid:
+                - "exchangeMailboxGuid"
+                - "guid"
+            encode_windows_password:
+                - "password"
+            windows_sid:
+                - "sid"
+            windows_generalized_time:
+                - "created"
+                - "modified"
+            windows_time:
+                - "passwordLastSet"
+            flags:
+                - "disabled"
+                - "enabled"
+                - "passwordIsReversible"
+                - "passwordNeverExpires"
+                - "smartCardRequired"
+                - "trustedForAllDelegation"
+                - "trustedForAnyAuthDelegation"
+            password_must_change: [passwordMustChange]
+            value_to_dn:
+                - "exchangeMailboxDatabase"
+                - "exchangePolicyRBAC"
+                - "exchangePolicyActiveSync"
+                - "exchangePolicyRetention"
+                - "manager"
+            exchange_proxy_address:
+                - "exchangeSmtpAddresses"
+                - "exchangeDefaultSmtpAddress"
+            logon_workstations: [logonWorkstations]
+            account_expires: [accountExpirationDate]
+            primary_group: [primaryGroup]
+            lockout_time:
+                - "locked"
+                - "lockedDate"
+            ip_address:
+                - ipAddress
         # This is the actual mapping of attribute names to what they really are in LDAP.
         attributes:
             accountExpirationDate: accountExpires
@@ -189,6 +191,7 @@ objects:
             username: sAMAccountName
             upn: userPrincipalName
             zipCode: postalCode
+            ipAddress: msRADIUSFramedIPAddress
         # These attributes will be forced into an array regardless of the number of results they return.
         multivalued_attributes:
             - logonWorkstations
@@ -204,54 +207,54 @@ objects:
             - otherPhoneNumbers
         # When querying LDAP via the LdapQueryBuilder or a Repository, retrieve these attributes by default.
         attributes_to_select:
-            - 'name'
-            - 'firstName'
-            - 'lastName'
-            - 'username'
-            - 'emailAddress'
-            - 'dn'
-            - 'guid'
+            - "name"
+            - "firstName"
+            - "lastName"
+            - "username"
+            - "emailAddress"
+            - "dn"
+            - "guid"
         default_values:
             name: "%username%"
             displayName: "%username%"
             firstName: "%username%"
             upn: "%username%@%_domainname_%"
             disabled: false
-            objectclass: [ 'top', 'person', 'organizationalPerson', 'user' ]
+            objectclass: ["top", "person", "organizationalPerson", "user"]
         required_attributes:
-            - 'username'
-            - 'password'
+            - "username"
+            - "password"
     group:
         type: group
         class: group
         converters:
-             bool:
-                - 'exchangeHideFromGAL'
-                - 'exchangeInternalOnly'
-             exchange_proxy_address:
-                - 'exchangeSmtpAddresses'
-                - 'exchangeDefaultSmtpAddress'
-             group_membership:
-                 - 'groups'
-             group_type:
-                 - 'typeBuiltin'
-                 - 'typeSecurity'
-                 - 'typeDistribution'
-                 - 'scopeGlobal'
-                 - 'scopeUniversal'
-                 - 'scopeDomainLocal'
-             int:
-                 - 'exchangeAddressBookFlags'
-             value_to_dn:
-                 - 'managedBy'
-                 - 'members'
-             windows_guid:
-                 - 'guid'
-             windows_sid:
-                 - 'sid'
-             windows_generalized_time:
-                 - 'created'
-                 - 'modified'
+            bool:
+                - "exchangeHideFromGAL"
+                - "exchangeInternalOnly"
+            exchange_proxy_address:
+                - "exchangeSmtpAddresses"
+                - "exchangeDefaultSmtpAddress"
+            group_membership:
+                - "groups"
+            group_type:
+                - "typeBuiltin"
+                - "typeSecurity"
+                - "typeDistribution"
+                - "scopeGlobal"
+                - "scopeUniversal"
+                - "scopeDomainLocal"
+            int:
+                - "exchangeAddressBookFlags"
+            value_to_dn:
+                - "managedBy"
+                - "members"
+            windows_guid:
+                - "guid"
+            windows_sid:
+                - "sid"
+            windows_generalized_time:
+                - "created"
+                - "modified"
         converter_options:
             group_type:
                 typeBuiltin:
@@ -269,9 +272,9 @@ objects:
                     flag_enum: 'LdapTools\Enums\AD\GroupType::UniversalGroup'
             exchange_proxy_address:
                 exchangeSmtpAddresses:
-                    address_type: 'smtp'
+                    address_type: "smtp"
                 exchangeDefaultSmtpAddress:
-                    address_type: 'smtp'
+                    address_type: "smtp"
                     is_default: true
             value_to_dn:
                 members:
@@ -279,8 +282,8 @@ objects:
                     attribute: sAMAccountName
                     or_filter: true
                     filter:
-                        objectClass: [ group, contact ]
-                        objectCategory: [ person, computer ]
+                        objectClass: [group, contact]
+                        objectCategory: [person, computer]
                 managedBy:
                     display_dn: true
                     attribute: sAMAccountName
@@ -321,39 +324,39 @@ objects:
             - members
             - objectClass
         attributes_to_select:
-            - 'name'
-            - 'dn'
-            - 'guid'
+            - "name"
+            - "dn"
+            - "guid"
         default_values:
             accountName: "%name%"
             objectclass: "group"
         required_attributes:
-            - 'name'
+            - "name"
     computer:
         type: computer
         category: computer
         converters:
-             group_membership:
-                 - 'groups'
-             windows_guid:
-                 - 'guid'
-             windows_sid:
-                 - 'sid'
-             windows_generalized_time:
-                 - 'created'
-                 - 'modified'
-             flags:
-                 - 'disabled'
-                 - 'enabled'
-                 - 'trustedForAllDelegation'
-                 - 'trustedForAnyAuthDelegation'
+            group_membership:
+                - "groups"
+            windows_guid:
+                - "guid"
+            windows_sid:
+                - "sid"
+            windows_generalized_time:
+                - "created"
+                - "modified"
+            flags:
+                - "disabled"
+                - "enabled"
+                - "trustedForAllDelegation"
+                - "trustedForAnyAuthDelegation"
         converter_options:
             flags:
                 _default:
                     default_value:
-                        LdapTools\Enums\AD\UserAccountControl: 'WorkstationTrustAccount'
+                        LdapTools\Enums\AD\UserAccountControl: "WorkstationTrustAccount"
                     attribute:
-                        LdapTools\Enums\AD\UserAccountControl: 'userAccountControl'
+                        LdapTools\Enums\AD\UserAccountControl: "userAccountControl"
                 disabled:
                     flag_enum: 'LdapTools\Enums\AD\UserAccountControl::Disabled'
                 enabled:
@@ -387,42 +390,43 @@ objects:
             - groups
             - objectClass
         attributes_to_select:
-            - 'name'
-            - 'os'
-            - 'dn'
-            - 'guid'
+            - "name"
+            - "os"
+            - "dn"
+            - "guid"
         default_values:
             accountName: "%name%"
             disabled: false
-            objectclass: [ 'top', 'person', 'organizationalPerson', 'user', 'computer' ]
+            objectclass:
+                ["top", "person", "organizationalPerson", "user", "computer"]
         required_attributes:
-            - 'name'
+            - "name"
     contact:
         type: contact
         category: contact
         converters:
-             bool:
-                - 'exchangeHideFromGAL'
-             exchange_proxy_address:
-                - 'exchangeSmtpAddresses'
-                - 'exchangeDefaultSmtpAddress'
-             group_membership:
-                 - 'groups'
-             value_to_dn:
-                 - 'manager'
-             windows_guid:
-                 - 'guid'
-             windows_sid:
-                 - 'sid'
-             windows_generalized_time:
-                 - 'created'
-                 - 'modified'
+            bool:
+                - "exchangeHideFromGAL"
+            exchange_proxy_address:
+                - "exchangeSmtpAddresses"
+                - "exchangeDefaultSmtpAddress"
+            group_membership:
+                - "groups"
+            value_to_dn:
+                - "manager"
+            windows_guid:
+                - "guid"
+            windows_sid:
+                - "sid"
+            windows_generalized_time:
+                - "created"
+                - "modified"
         converter_options:
             exchange_proxy_address:
                 exchangeSmtpAddresses:
-                    address_type: 'smtp'
+                    address_type: "smtp"
                 exchangeDefaultSmtpAddress:
-                    address_type: 'smtp'
+                    address_type: "smtp"
                     is_default: true
             value_to_dn:
                 manager:
@@ -457,30 +461,30 @@ objects:
             - groups
             - objectClass
         attributes_to_select:
-            - 'name'
-            - 'emailAddress'
-            - 'phoneNumber'
-            - 'dn'
-            - 'guid'
+            - "name"
+            - "emailAddress"
+            - "phoneNumber"
+            - "dn"
+            - "guid"
         default_values:
             displayName: "%name%"
-            objectclass: [ 'top', 'person', 'organizationalPerson', 'contact' ]
+            objectclass: ["top", "person", "organizationalPerson", "contact"]
         required_attributes:
-            - 'name'
-            - 'emailAddress'
+            - "name"
+            - "emailAddress"
     ou:
         type: ou
         class: organizationalUnit
         converters:
-             windows_guid:
-                 - 'guid'
-             windows_sid:
-                 - 'sid'
-             windows_generalized_time:
-                 - 'created'
-                 - 'modified'
-             gpo_link: [ gpoLinks ]
-             gpoptions: gpoInheritanceBlocked
+            windows_guid:
+                - "guid"
+            windows_sid:
+                - "sid"
+            windows_generalized_time:
+                - "created"
+                - "modified"
+            gpo_link: [gpoLinks]
+            gpoptions: gpoInheritanceBlocked
         attributes:
             city: l
             country: c
@@ -500,24 +504,24 @@ objects:
             - gpoLinks
             - objectClass
         attributes_to_select:
-            - 'description'
-            - 'name'
-            - 'guid'
-            - 'sid'
+            - "description"
+            - "name"
+            - "guid"
+            - "sid"
         default_values:
-            objectclass: [ 'top', 'organizationalUnit' ]
+            objectclass: ["top", "organizationalUnit"]
         required_attributes:
-            - 'name'
+            - "name"
     container:
         type: container
         filter:
-            eq: [ objectCategory, container ]
+            eq: [objectCategory, container]
         converters:
-             windows_guid:
-                 - 'guid'
-             windows_generalized_time:
-                 - 'created'
-                 - 'modified'
+            windows_guid:
+                - "guid"
+            windows_generalized_time:
+                - "created"
+                - "modified"
         attributes:
             created: whenCreated
             description: description
@@ -528,48 +532,48 @@ objects:
         multivalued_attributes:
             - objectClass
         attributes_to_select:
-            - 'description'
-            - 'name'
-            - 'guid'
+            - "description"
+            - "name"
+            - "guid"
         default_values:
-            objectclass: [ 'top', 'container' ]
+            objectclass: ["top", "container"]
         required_attributes:
-            - 'name'
+            - "name"
     password_settings:
         type: PSO
         class: msDS-PasswordSettings
         converters:
-             ad_time_span:
-                 - 'maximumPasswordAge'
-                 - 'minimumPasswordAge'
-                 - 'lockoutObservationWindow'
-                 - 'lockoutDuration'
-             bool:
-                 - 'passwordComplexity'
-                 - 'passwordReversibleEncryption'
-             int:
-                 - 'lockoutThreshold'
-                 - 'minimumPasswordLength'
-                 - 'passwordHistoryLength'
-                 - 'precedence'
-             value_to_dn:
-                 - 'appliesTo'
-             windows_guid:
-                 - 'guid'
-             windows_sid:
-                 - 'sid'
-             windows_generalized_time:
-                 - 'created'
-                 - 'modified'
+            ad_time_span:
+                - "maximumPasswordAge"
+                - "minimumPasswordAge"
+                - "lockoutObservationWindow"
+                - "lockoutDuration"
+            bool:
+                - "passwordComplexity"
+                - "passwordReversibleEncryption"
+            int:
+                - "lockoutThreshold"
+                - "minimumPasswordLength"
+                - "passwordHistoryLength"
+                - "precedence"
+            value_to_dn:
+                - "appliesTo"
+            windows_guid:
+                - "guid"
+            windows_sid:
+                - "sid"
+            windows_generalized_time:
+                - "created"
+                - "modified"
         converter_options:
             value_to_dn:
-                 appliesTo:
-                     display_dn: true
-                     attribute: sAMAccountName
-                     or_filter: true
-                     filter:
-                         objectClass: group
-                         objectCategory: person
+                appliesTo:
+                    display_dn: true
+                    attribute: sAMAccountName
+                    or_filter: true
+                    filter:
+                        objectClass: group
+                        objectCategory: person
         attributes:
             appliesTo: msDS-PSOAppliesTo
             created: whenCreated
@@ -593,55 +597,56 @@ objects:
             - objectClass
             - appliesTo
         attributes_to_select:
-            - 'description'
-            - 'name'
-            - 'guid'
-            - 'sid'
+            - "description"
+            - "name"
+            - "guid"
+            - "sid"
         default_values:
-            objectclass: [ 'top', 'msDS-PasswordSettings' ]
+            objectclass: ["top", "msDS-PasswordSettings"]
             passwordReversibleEncryption: false
-        default_container: 'CN=Password Settings Container,CN=System,%_defaultnamingcontext_%'
+        default_container: "CN=Password Settings Container,CN=System,%_defaultnamingcontext_%"
         required_attributes:
-            - 'name'
-            - 'lockoutDuration'
-            - 'lockoutObservationWindow'
-            - 'lockoutThreshold'
-            - 'maximumPasswordAge'
-            - 'minimumPasswordAge'
-            - 'minimumPasswordLength'
-            - 'passwordComplexity'
-            - 'passwordHistoryLength'
-            - 'passwordReversibleEncryption'
-            - 'precedence'
+            - "name"
+            - "lockoutDuration"
+            - "lockoutObservationWindow"
+            - "lockoutThreshold"
+            - "maximumPasswordAge"
+            - "minimumPasswordAge"
+            - "minimumPasswordLength"
+            - "passwordComplexity"
+            - "passwordHistoryLength"
+            - "passwordReversibleEncryption"
+            - "precedence"
     deleted:
         type: deleted
         filter:
-            eq: [ isDeleted, true ]
+            eq: [isDeleted, true]
             present: lastKnownLocation
         controls:
-            - [ 'ShowDeleted', true ]
+            - ["ShowDeleted", true]
         paging: false
         base_dn: "CN=Deleted Objects,%_defaultNamingContext_%"
         converters:
-             bool:
-                 - 'isDeleted'
-             ldap_type:
-                 - 'schemaType'
-             windows_guid:
-                 - 'guid'
-             windows_sid:
-                 - 'sid'
-             windows_generalized_time:
-                 - 'created'
-                 - 'modified'
+            bool:
+                - "isDeleted"
+            ldap_type:
+                - "schemaType"
+            windows_guid:
+                - "guid"
+            windows_sid:
+                - "sid"
+            windows_generalized_time:
+                - "created"
+                - "modified"
         converter_options:
             ldap_type:
                 schemaType:
-                    user: [ top, person, organizationalPerson, user ]
-                    group: [ top, group ]
-                    computer: [ top, person, organizationalPerson, user, computer ]
-                    contact: [ top, person, organizationalPerson, contact ]
-                    ou: [ top, organizationalUnit ]
+                    user: [top, person, organizationalPerson, user]
+                    group: [top, group]
+                    computer:
+                        [top, person, organizationalPerson, user, computer]
+                    contact: [top, person, organizationalPerson, contact]
+                    ou: [top, organizationalUnit]
         attributes:
             created: whenCreated
             dn: distinguishedName
@@ -657,9 +662,9 @@ objects:
             sid: objectSid
             upn: userPrincipalName
         attributes_to_select:
-            - 'name'
-            - 'guid'
-            - 'lastKnownLocation'
-            - 'lastKnownName'
-            - 'sid'
-            - 'schemaType'
+            - "name"
+            - "guid"
+            - "lastKnownLocation"
+            - "lastKnownName"
+            - "sid"
+            - "schemaType"
