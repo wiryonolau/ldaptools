@@ -8,8 +8,8 @@ help: ## This help.
 .DEFAULT_GOAL := help
 
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
-PHP_VERSION ?= "8.1"
-MEMCACHED_VERSION ?= "3.2.0"
+PHP_VERSION := "8.3"
+MEMCACHED_VERSION := "3.2.0"
 
 %:
 	@echo ""
@@ -27,14 +27,6 @@ run:
 		--user "$$(id -u):$$(id -g)" \
         --name $$(basename "`pwd`")_cli \
     php:$(PHP_VERSION)-cli-ext $(filter-out $@,$(MAKECMDGOALS))
-unittest:
-	$(MAKE) build
-	docker run --rm -it \
-        -v $$(pwd):/srv/$$(basename "`pwd`") \
-		-w /srv/$$(basename "`pwd`") \
-		--user "$$(id -u):$$(id -g)" \
-        --name $$(basename "`pwd`")_cli \
-    php:$(PHP_VERSION)-cli-ext vendor/bin/phpunit --verbose --debug tests
 composer-install:
 	docker run --rm -it \
         -v $$(pwd):/srv/$$(basename "`pwd`") \
@@ -63,3 +55,7 @@ composer:
         -e COMPOSER_HOME="/srv/$$(basename "`pwd`")/.composer" \
         --user $$(id -u):$$(id -g) \
     composer composer $(filter-out $@,$(MAKECMDGOALS))
+phpstan:
+	docker run --rm -it \
+		-v $$(pwd):/app \
+	ghcr.io/phpstan/phpstan:2-php${PHP_VERSION} analyse || true

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -52,6 +53,8 @@ class LdapObjectManager
      * @var EventDispatcherInterface
      */
     protected $dispatcher;
+
+    protected $hydrator;
 
     /**
      * @param LdapConnectionInterface $connection
@@ -126,7 +129,7 @@ class LdapObjectManager
         $this->connection->execute($operation);
 
         // Update the object to reference the new DN after the move...
-        $newDn = LdapUtilities::getRdnFromDn($ldapObject->get('dn')).','.$container;
+        $newDn = LdapUtilities::getRdnFromDn($ldapObject->get('dn')) . ',' . $container;
         $ldapObject->refresh(['dn' => $newDn]);
         $ldapObject->getBatchCollection()->setDn($newDn);
 
@@ -172,7 +175,7 @@ class LdapObjectManager
     protected function executeBatchOperation(LdapObject $ldapObject, $dn = null)
     {
         $dn = $dn ?: $ldapObject->get('dn');
-        
+
         $operation = new BatchModifyOperation($dn, $ldapObject->getBatchCollection());
         $this->hydrateOperation($operation, $ldapObject->getType());
         $this->connection->execute($operation);
@@ -180,7 +183,7 @@ class LdapObjectManager
 
         $ldapObject->setBatchCollection(new BatchCollection($ldapObject->get('dn')));
     }
-    
+
     /**
      * It's possible a new location was not explicitly given and the attribute that contains the last know location
      * was not queried for when the object was originally found. In that case attempt to retrieve the last known
@@ -195,10 +198,10 @@ class LdapObjectManager
         // If a location was defined, use that.
         if ($location) {
             $newLocation = (string) $location;
-        // Check the attribute for the last known location first...
+            // Check the attribute for the last known location first...
         } elseif ($ldapObject->has('lastKnownLocation')) {
             $newLocation = $ldapObject->get('lastKnownLocation');
-        // All else failed, so query it from the DN...
+            // All else failed, so query it from the DN...
         } else {
             try {
                 $newLocation = (new LdapQueryBuilder($this->connection, $this->schemaFactory))
@@ -281,6 +284,6 @@ class LdapObjectManager
         $rdn = $operation->getNewRdn() ?: LdapUtilities::getRdnFromDn($ldapObject->get('dn'));
         $parentDn = $operation->getNewLocation() ?: LdapUtilities::getParentDn($ldapObject->get('dn'));
 
-        return $rdn.','.$parentDn;
+        return $rdn . ',' . $parentDn;
     }
 }
